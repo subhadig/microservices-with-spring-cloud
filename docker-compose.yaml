@@ -1,0 +1,56 @@
+version: "3"
+services:
+  naming:
+    image: naming:latest
+    deploy:
+      replicas: 1
+      resources:
+        limits:
+          cpus: "1"
+          memory: 512M
+      restart_policy:
+        condition: on-failure
+    ports:
+      - "8761:8761"
+    networks:
+      - hostonly
+    volumes:
+      - "logdata:/tmp"
+    tty: true
+    stdin_open: true
+  forex:
+    image: forex:latest
+    deploy:
+      replicas: 1
+      resources:
+        limits:
+          cpus: "1"
+          memory: 512M
+      restart_policy:
+        condition: on-failure
+    networks:
+      - hostonly
+    volumes:
+      - "logdata:/tmp"
+    tty: true
+    stdin_open: true
+  currencycon:
+    image: currencycon:latest
+    deploy:
+      replicas: 1
+      resources:
+        limits:
+          cpus: "1"
+          memory: 512M
+      restart_policy:
+        condition: on-failure
+    networks:
+      - hostonly
+    volumes:
+      - "logdata:/tmp"
+    tty: true
+    stdin_open: true
+networks:
+  hostonly:
+volumes:
+  logdata:
