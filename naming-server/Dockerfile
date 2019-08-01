@@ -1,7 +1,6 @@
-FROM debian:9
+FROM openjdk:8-alpine
 MAINTAINER Subhadip Ghosh (subhadip.sky@gmail.com)
-RUN apt-get update
-RUN apt-get install -y openjdk-8-jre
-COPY target/*jar /opt/naming-server.jar
-ENTRYPOINT ["/usr/bin/java", "-jar", "/opt/naming-server.jar"]
+ARG JAR_FILE
+COPY ${JAR_FILE} /opt/app.jar
+ENTRYPOINT ["/usr/bin/java", "-jar", "/opt/app.jar"]
 EXPOSE 8761
